@@ -53,7 +53,7 @@
                     <h1 class="display-5 fw-bold">Hi, {{ auth()->user()->name }}</h1>
                     <p class="col-md-8 fs-4">Welcome to dashboard</p>
                     <button class="btn btn-primary btn-lg" type="button">Dashboard</button>
-                    <button class="btn btn-primary btn-lg" type="button">Posts</button>
+                    <button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='{{ route('posts') }}'">Posts</button>
                 </div>
             </div>
 
