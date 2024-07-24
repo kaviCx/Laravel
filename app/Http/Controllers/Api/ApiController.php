@@ -25,6 +25,7 @@ class ApiController extends Controller
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return response([
+            'message' => 'User Register successfully',
             'user' => $user,
             'access_token' => $accessToken],
             201);
@@ -47,6 +48,7 @@ class ApiController extends Controller
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return response()->json([
+            'message' => 'User Login successfully',
             'user' => $user,
             'access_token' => $accessToken,
         ]);
@@ -54,14 +56,11 @@ class ApiController extends Controller
 
     public function logout(Request $request){
 
-        // auth()->user()->token()->delete();
-        // $token->revoke();
-
         $token = Auth::user()->token();
         $token->revoke();
         return response()->json([
-            'status' => true,
             'message' => 'User Logout successfully',
+            'status' => true,
             'data' => [],
         ],200);
     }
