@@ -22,7 +22,9 @@ class ApiController extends Controller
 
         $user = User::create($registerdData);
 
-        $accessToken = $user->createToken('authToken')->accessToken;
+        $accessToken = $user
+            ->createToken('authToken')
+            ->accessToken;
 
         return response([
             'message' => 'User Register successfully',
@@ -41,11 +43,15 @@ class ApiController extends Controller
         ]);
 
         if (!auth()->attempt($loginData)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json(
+                ['message' => 'Invalid credentials'],
+                401);
         }
 
         $user = auth()->user();
-        $accessToken = $user->createToken('authToken')->accessToken;
+        $accessToken = $user
+        ->createToken('authToken')
+        ->accessToken;
 
         return response()->json([
             'message' => 'User Login successfully',
