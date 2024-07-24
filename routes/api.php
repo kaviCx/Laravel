@@ -19,3 +19,8 @@ Route::group([
     Route::get('/logout', [ApiController::class, 'logout']);
     Route::get('/posts', [ApiController::class, 'fetchPosts']);
 });
+
+Route::prefix('v1')->group(function () {
+    Route::get('/posts', [ApiController::class, 'getPosts']);
+    Route::get('/posts/{postId}/comments', [ApiController::class, 'getComments']);
+});

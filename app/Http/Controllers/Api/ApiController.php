@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
+    private MockApiService $mockApiService;
+
+    public function __construct(MockApiService $mockApiService)
+    {
+        $this->mockApiService = $mockApiService;
+    }
 
     public function register(Request $request)
     {
@@ -25,6 +31,7 @@ class ApiController extends Controller
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return response([
+            'message' => 'User Registered successfully',
             'user' => $user,
             'access_token' => $accessToken],
             201);
@@ -47,6 +54,7 @@ class ApiController extends Controller
         $accessToken = $user->createToken('authToken')->accessToken;
 
         return response()->json([
+            'message' => 'User logged in successfully',
             'user' => $user,
             'access_token' => $accessToken,
         ]);
@@ -71,5 +79,29 @@ class ApiController extends Controller
         $posts = Post::all();
         return response()->json($posts);
     }
+
+
+
+
+    public function getPosts(): JsonResponse
+    {
+        try {
+            $posts = $this->mockApiService->getPosts();
+            return response()->json($posts);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function getComments(int $postId): JsonResponse
+    {
+        try {
+            $comments = $this->mockApiService->getComments($postId);
+            return response()->json($comments);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+}
 
 }
