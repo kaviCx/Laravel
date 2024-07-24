@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
+    /*
+     * @OA\Post(
+     *        path="/api/register",
+     *        tags={"Register"},
+     *        summary="Register",
+     * )
+     * @OA\Response()
+     */
 
     public function register(Request $request)
     {
@@ -54,8 +62,7 @@ class ApiController extends Controller
 
     public function logout(Request $request){
 
-        // auth()->user()->token()->delete();
-        // $token->revoke();
+
 
         $token = Auth::user()->token();
         $token->revoke();
