@@ -22,5 +22,5 @@ Route::group([
 
 Route::prefix('v1')->group(function () {
     Route::get('/posts', [ApiController::class, 'getPosts']);
-    Route::get('/posts/{postId}/comments', [ApiController::class, 'getComments']);
+    Route::get('/comments', [ApiController::class, 'getComments']);
 });

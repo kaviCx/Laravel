@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
+use App\Services\MockApiService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -93,10 +95,10 @@ class ApiController extends Controller
         }
     }
 
-    public function getComments(int $postId): JsonResponse
+    public function getComments(): JsonResponse
     {
         try {
-            $comments = $this->mockApiService->getComments($postId);
+            $comments = $this->mockApiService->getComments();
             return response()->json($comments);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -104,4 +106,3 @@ class ApiController extends Controller
     }
 }
 
-}

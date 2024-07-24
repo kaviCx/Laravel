@@ -17,14 +17,14 @@ class MockApiService
         }
     }
 
-    public function getComments(int $postId): array
+    public function getComments(): array
     {
-        $response = Http::get("https://jsonplaceholder.typicode.com/posts/$postId/comments");
+        $response = Http::get("https://jsonplaceholder.typicode.com/comments");
 
         if ($response->successful()) {
             return $response->json();
         } else {
-            throw new \Exception("Failed to retrieve comments for post $postId. Status code: " . $response->getStatusCode());
+            throw new \Exception("Failed to retrieve comments for post . Status code: " . $response->getStatusCode());
         }
     }
 }
