@@ -88,7 +88,7 @@ class ApiController extends Controller
     public function getPosts(): JsonResponse
     {
         try {
-            $posts = $this->mockApiService->getPosts();
+            $posts = $this->mockApiService->getPostsOrComments($type = 'posts');
             return response()->json($posts);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -98,7 +98,7 @@ class ApiController extends Controller
     public function getComments(): JsonResponse
     {
         try {
-            $comments = $this->mockApiService->getComments();
+            $comments = $this->mockApiService->getPostsOrComments($type = 'comments');
             return response()->json($comments);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
